@@ -1,10 +1,33 @@
-import { StyleSheet, Text, Button, View} from 'react-native';
+import { StyleSheet, Text, View, SectionList} from 'react-native';
 
+const BOOKS = [ 
+    {
+    title: 'Fantasy',
+    data: ['Lord of The Rings', 'Rangers Apprentice']
+    },
+    {
+    title: 'Nonfiction',
+    data: ['Hood Feminism', 'White Tears/Brown Scars']
+    },
+]
 
 const LogScreen = () => { 
     return (
       <View style={styles.container}>
-        <Text>Welcome!</Text>
+        <Text style={styles.Title}>Log</Text>
+
+        <SectionList
+            sections={BOOKS}
+            keyExtractor={(item, index) => item + index}
+            renderItem={({item}) => (
+                <View style={styles.item}>
+                    <Text style={styles.title}>{item}</Text>
+                </View>
+            )}
+            renderSectionHeader={({section: {title}}) => (
+                <Text style={styles.header}>{title}</Text>
+             )}
+        />
       </View>
     );
 }
@@ -18,7 +41,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
-    Text: {
+    Title: {
       fontSize: 60,
       fontFamily: 'sans-serif-light',
     },
@@ -35,15 +58,23 @@ const styles = StyleSheet.create({
       fontFamily: 'sans-serif-light',
       color: 'white',
     },
-    input: {
-      height: 40,
-      margin: 5,
-      borderWidth: 1,
-      padding: 10,
-      width: 200,
-    },
     space: {
       width: 10,
       height: 10,
+    },
+    item: {
+      fontFamily: 'sans-serif-light',
+      color: 'white',
+      backgroundColor: 'pink',
+      padding: 20,
+      marginVertical: 8,
+    },
+    header: {
+      fontSize: 40,
+      backgroundColor: 'pink',
+    },
+    title: {
+      fontSize: 24,
+      fontFamily: 'sans-serif-light',
     },
   });
