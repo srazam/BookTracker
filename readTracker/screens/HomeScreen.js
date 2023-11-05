@@ -22,6 +22,10 @@ const HomeScreen = ({navigation}) => {
           <Text style={styles.textButton}>See Book Log</Text>
         </Pressable>
         <View style={styles.space}/>
+        <Pressable style={styles.button} onPress={() => navigation.navigate('Game')}>
+          <Text style={styles.textButton}>Start Reading</Text>
+        </Pressable>
+        <View style={styles.space}/>
         <Pressable style={styles.button} onPress={() => navigation.navigate('Help')}>
           <Text style={styles.textButton}>Help</Text>
         </Pressable>

@@ -1,6 +1,5 @@
 import { StyleSheet, Text, Pressable, View} from 'react-native';
 
-
 const HelpScreen = () => { 
     return (
       <View style={styles.container}>
