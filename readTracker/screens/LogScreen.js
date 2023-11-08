@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View, SectionList} from 'react-native';
+import { StyleSheet, Text, View, SectionList, TextInput, Pressable, FlatList } from 'react-native';
+import React, { useState } from 'react';
 
 const BOOKS = [ 
     {
@@ -12,6 +13,16 @@ const BOOKS = [
 ]
 
 const LogScreen = () => { 
+  const [inputValue, setInputValue] = useState('');
+  const [items, setItems] = useState([]);
+
+  const handleAddItem = () => {
+    if (inputValue.trim() !== ''){
+      setItems([...items, inputValue]);
+      setInputValue('');
+    }
+  };
+
     return (
       <View style={styles.container}>
         <Text style={styles.Title}>Log</Text>
@@ -28,6 +39,28 @@ const LogScreen = () => {
                 <Text style={styles.header}>{title}</Text>
              )}
         />
+
+        <Text style={styles.Title}>Reading...</Text>
+        <TextInput
+        placeholder="What are you reading?"
+        value={inputValue}
+        onChangeText={(text) => setInputValue(text)}
+        />
+        <Pressable style={styles.button} onPress={handleAddItem}>
+          <Text style={styles.textButton}>Add Item</Text>
+        </Pressable>
+
+        <FlatList
+          data={items}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item, index }) => (
+            <View style={styles.listItem}>
+              <Text style={styles.bulletPoint}>{`\u2022`}</Text>
+              <Text style={styles.listItemText}>{item}</Text>
+            </View>
+          )}
+        />
+
       </View>
     );
 }
@@ -76,5 +109,17 @@ const styles = StyleSheet.create({
     title: {
       fontSize: 24,
       fontFamily: 'sans-serif-light',
+    },
+    listItem: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginVertical: 5,
+    },
+    bulletPoint: {
+      fontSize: 20,
+      marginRight: 5,
+    },
+    listItemText: {
+      fontSize: 16,
     },
   });
